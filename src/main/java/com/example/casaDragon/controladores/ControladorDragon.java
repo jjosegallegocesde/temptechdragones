@@ -1,7 +1,14 @@
 package com.example.casaDragon.controladores;
 
+import com.example.casaDragon.DTO.DragonDTO;
 import com.example.casaDragon.models.Dragon;
 import com.example.casaDragon.servicios.DragonServicio;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +25,32 @@ public class ControladorDragon {
     DragonServicio dragonServicio;
 
     @PostMapping
+    @Operation(
+            summary = "Registra un dragon nuevo en la base de datos",
+            description = "al llevar nombres, edad, altura se registra con exito el dragon"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Dragon creado con exito en BD",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = DragonDTO.class),
+                                    examples = @ExampleObject(value = "{\"nombres\":\"Lucerys valeryon\",\"edad\":\"400\"}")
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Error al registrar el dragon",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = String.class),
+                                    examples = @ExampleObject(value = "{\"error\":\"Datos invalidos querido mother fucker\"}")
+                            )
+                    )
+            }
+    )
     public ResponseEntity<?> guardarDragon(@RequestBody Dragon datosClienteDragon){
         try{
             return ResponseEntity
