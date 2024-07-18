@@ -29,4 +29,28 @@ public class DragonValidacion {
 
     }
 
+    public boolean validarEdad(Integer edad){
+        if(edad <=0 || edad >2000){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean validarAltura(Double altura){
+        if(altura<0){
+            return false;
+        }
+        return true;
+    }
+
+
+    public boolean validarVictorias(Integer victorias){
+        if(victorias<0){
+            return false;
+        }
+        return true;
+
+    }
+
 }

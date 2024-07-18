@@ -29,6 +29,13 @@ public class DragonServicio {
         try{
 
             if(!dragonValidacion.validarNombresDragon(datosDragon.getNombres())){
+
+                if(!dragonValidacion.validarAltura(datosDragon.getAltura())){
+
+                    throw new Exception("Revisa la altura del dragon");
+
+                }
+
                 throw new Exception("Revisa el nombre del dragon");
             }
 
