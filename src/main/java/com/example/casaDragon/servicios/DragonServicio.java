@@ -30,16 +30,20 @@ public class DragonServicio {
 
             if(!dragonValidacion.validarNombresDragon(datosDragon.getNombres())){
 
-                if(!dragonValidacion.validarAltura(datosDragon.getAltura())){
+                throw new Exception("Revisa los nombres del dragon");
 
-                    throw new Exception("Revisa la altura del dragon");
 
-                }
+            } else if(!dragonValidacion.validarAltura(datosDragon.getAltura())){
 
-                throw new Exception("Revisa el nombre del dragon");
+                throw new Exception("Revisa la altura del dragon");
+
+            }else{
+
+                return iMapaDragon.mapearDragon(dragonRepositorio.save(datosDragon));
+
             }
 
-            return iMapaDragon.mapearDragon(dragonRepositorio.save(datosDragon));
+
 
 
 
